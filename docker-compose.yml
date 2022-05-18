@@ -3,25 +3,25 @@ services:
   db:
     image: postgres:13
     container_name: db
-    restart: always #container reinicia se morrer
+    restart: always
     ports:
       - 2345:5432
     env_file:
-      - .env #configurar POSTGRES_USER, POSTGRES_PASSWORD e POSTGRES_DB
+      - .env
     volumes:
     - postgres:/var/lib/postgresql/data
 
   node:
     container_name: node
-    build: . #Dockerfile do node se encontra na pasta atual
+    build: .
     ports:
       - 5000:5000
     entrypoint: dockerize -wait tcp://db:5432 -timeout 20s docker-entrypoint.sh
     command: "npm run dev:migrate" 
     depends_on:
-      - db # só sobe quando o postgres tiver no ar
+      - db
     env_file:
-      - .env #configurar DATABASE_URL
+      - .env
     volumes:
       - .:/usr/src
       - /usr/src/node_modules
