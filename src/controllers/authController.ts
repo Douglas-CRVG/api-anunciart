@@ -18,7 +18,7 @@ export async function signIn(req: Request, res: Response) {
     res.send({ token });
 }
 
-export async function find(req: Request, res: Response) {
+export async function findAll(req: Request, res: Response) {
     const result = await prisma.user.findMany()
 
     res.send(result);
