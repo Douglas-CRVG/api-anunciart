@@ -20,7 +20,7 @@ jobs:
           envkey_NODE_ENV: "production"
           file_name: .env
       - name: Push to Heroku Prisma Schema
-        run: docker-compose -f docker-compose-production.yml run node_app_anunciart npm run push
+        run: docker-compose -f docker-compose.yml run node_app_anunciart npm run push
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
