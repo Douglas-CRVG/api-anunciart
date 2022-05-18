@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs: 
-  Deploy-Heroku: 
+  HerokuDeploy: 
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -16,7 +16,7 @@ jobs:
           envkey_POSTGRES_PASSWORD: "21e0db64a1bcf3fd2f1ec44d69b8ac12d89f3f60e4cbf75518ff130021d48698"
           envkey_POSTGRES_DB: "d7am5eqpnd5o3t"
           envkey_DATABASE_URL: "postgres://obvmcmgtfotqje:21e0db64a1bcf3fd2f1ec44d69b8ac12d89f3f60e4cbf75518ff130021d48698@ec2-52-86-115-245.compute-1.amazonaws.com:5432/d7am5eqpnd5o3t"
-          envkey_PORT: "5432"
+          envkey_PORT: "5000"
           envkey_NODE_ENV: "production"
           file_name: .env
       - name: Push to Heroku Prisma Schema
