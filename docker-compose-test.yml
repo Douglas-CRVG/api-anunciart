@@ -9,8 +9,8 @@ services:
     env_file:
       - .env.test
 
-  node:
-    container_name: node
+  node_app_anunciart:
+    container_name: node_app_anunciart
     build: .
     ports:
       - 5000:5000
