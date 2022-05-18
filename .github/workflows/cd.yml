@@ -1,16 +1,26 @@
-name: Deploy on Heroku
-
+name: Deploy to Heroku
 on:
   push:
     branches:
       - main
-
-jobs:
-  HerokuDeploy:
+jobs: 
+  Deploy-Heroku: 
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: Make env file
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_POSTGRES_USER: "obvmcmgtfotqje"
+          envkey_POSTGRES_PASSWORD: "21e0db64a1bcf3fd2f1ec44d69b8ac12d89f3f60e4cbf75518ff130021d48698"
+          envkey_POSTGRES_DB: "d7am5eqpnd5o3t"
+          envkey_DATABASE_URL: "postgres://obvmcmgtfotqje:21e0db64a1bcf3fd2f1ec44d69b8ac12d89f3f60e4cbf75518ff130021d48698@ec2-52-86-115-245.compute-1.amazonaws.com:5432/d7am5eqpnd5o3t"
+          envkey_PORT: "5432"
+          envkey_NODE_ENV: "production"
+          file_name: .env
+      - name: Push to Heroku Prisma Schema
+        run: docker-compose -f docker-compose-production.yml run node_app_anunciart npm run push
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
