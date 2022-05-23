@@ -7,6 +7,6 @@ const authRouter = Router();
 
 authRouter.post("/sign-up", validateSchemaMiddleware(authSchema.signUpSchema), authController.signUp);
 authRouter.post("/sign-in", validateSchemaMiddleware(authSchema.signInSchema), authController.signIn);
-authRouter.get("/find-all", authController.findAll);
+authRouter.get("/find", authController.findAll);
 
 export default authRouter;

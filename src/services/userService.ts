@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import userRepository from "../repositories/userRepository.js";
 import {
     conflictError,
+    notFoundError,
     unauthorizedError,
 } from "../utils/errorUtils.js";
 dotenv.config();
@@ -39,7 +40,15 @@ async function getUserOrFail(loginData: SignIn) {
     return user;
 }
 
+async function findById(id: number) {
+    const user = await userRepository.findById(id);
+    if (!user) throw notFoundError("User not found");
+
+    return user;
+}
+
 export default {
     signUp,
     signIn,
+    findById,
 };
