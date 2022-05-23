@@ -1,6 +1,6 @@
 import { Video } from "@prisma/client";
 import videoRepository, { CreateVideo, } from "../repositories/videoRepository.js";
-import { conflictError } from "../utils/errorUtils.js";
+import { conflictError, notFoundError } from "../utils/errorUtils.js";
 
 export async function create(data: CreateVideo) {
     await findByLink(data.link)
@@ -27,6 +27,13 @@ export async function find() {
         findNew: await videoRepository.findNew(),
         findAll: await videoRepository.findAll()
     };
+
+    return result;
+}
+
+export async function findByIdVideo(id: string) {
+    const result = await videoRepository.findByLink(id);
+    if (!result) throw notFoundError("Not found")
 
     return result;
 }

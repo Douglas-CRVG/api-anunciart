@@ -3,7 +3,8 @@ import client from "../clientVimeo.js";
 import { notFoundError } from "../utils/errorUtils.js";
 
 export function verifyStatusMiddleware(req: Request, res: Response, next: NextFunction) {
-    const { uri } = req.body;
+    const { id } = req.params;
+    const uri = `/videos/${id}`
     client.request(uri + '?fields=transcode.status', function (error, body, status_code, headers) {
         if (body.transcode.status === 'complete') {
             next()

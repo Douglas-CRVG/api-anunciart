@@ -35,18 +35,11 @@ export async function create(req: Request, res: Response) {
     )
 }
 
-export function getLink(req: Request, res: Response) {
-    const { uri } = req.body;
-    client.request(uri + '?fields=link', function (error, body, statusCode, headers) {
-        if (error) {
-            console.log('There was an error making the request.')
-            console.log('Server reported: ' + error)
-            res.status(statusCode).send(error)
-            return
-        }
+export async function getLink(req: Request, res: Response) {
+    const { id } = req.params;
+    const result = await videoService.findByIdVideo(id)
 
-        res.send({ link: body.link })
-    })
+    res.send(result)
 }
 
 export async function find(req: Request, res: Response) {
