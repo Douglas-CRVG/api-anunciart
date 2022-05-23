@@ -21,8 +21,21 @@ async function findByName(name: string) {
     })
 }
 
+async function findAll() {
+    return await prisma.video.findMany()
+}
+
+async function findNew() {
+    return await prisma.video.findMany({
+        orderBy: {
+            createdAt: 'desc'
+        },
+        take: 3
+    })
+}
+
 const videoRepository = {
-    create, findByName, findByLink
+    create, findByName, findByLink, findAll, findNew
 }
 
 export default videoRepository;

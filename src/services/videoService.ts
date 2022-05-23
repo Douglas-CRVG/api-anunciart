@@ -1,3 +1,4 @@
+import { Video } from "@prisma/client";
 import videoRepository, { CreateVideo, } from "../repositories/videoRepository.js";
 import { conflictError } from "../utils/errorUtils.js";
 
@@ -19,4 +20,13 @@ async function findByLink(link: string) {
     const resultLink = await videoRepository.findByLink(link);
     if (resultLink)
         throw conflictError("there is already a presentation with this name");
+}
+
+export async function find() {
+    const result = {
+        findNew: await videoRepository.findNew(),
+        findAll: await videoRepository.findAll()
+    };
+
+    return result;
 }

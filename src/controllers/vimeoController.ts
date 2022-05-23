@@ -48,3 +48,9 @@ export function getLink(req: Request, res: Response) {
         res.send({ link: body.link })
     })
 }
+
+export async function find(req: Request, res: Response) {
+    const result = await videoService.find();
+
+    res.status(200).send(result);
+}
