@@ -23,6 +23,7 @@ model Video {
   id          Int      @id @default(autoincrement())
   name        String   @unique
   description String
+  thumbnail   String?
   link        String   @unique
   createdAt   DateTime @default(now())
 

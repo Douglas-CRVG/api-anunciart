@@ -11,4 +11,7 @@ function getTutorial() {
     return axios.get(`${URL}/tutorial`, createConfig());
 }
 
-export { getTutorial };
+async function getThumbnail(videoId: string) {
+    return await axios.get(`${URL}/videos/${videoId}/pictures`, createConfig())
+}
+export { getTutorial, getThumbnail };
